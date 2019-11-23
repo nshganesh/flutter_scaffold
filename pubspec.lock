@@ -8,5 +8,19 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.2"
+  meta:
+    dependency: "direct dev"
+    description:
+      name: meta
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.8"
+  mustache:
+    dependency: "direct dev"
+    description:
+      name: mustache
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
 sdks:
   dart: ">=2.1.0 <3.0.0"

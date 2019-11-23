@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+
+class {{ page }} extends StatefulWidget {
+  const {{ page }}({ Key key }) : super(key: key);
+
+  @override
+  {{ page }}State createState() => {{ page }}State();
+}
+
+class {{ page }}State extends State<{{ page }}> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(),
+    );
+  }
+}
+
