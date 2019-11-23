@@ -11,3 +11,4 @@ dev_dependencies:
   args: ^1.5.2
   meta: ^1.1.8
   mustache: ^1.1.1
+  recase: ^2.0.1

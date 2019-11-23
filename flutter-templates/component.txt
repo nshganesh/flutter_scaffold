@@ -33,4 +33,3 @@ class {{ page }} extends StatelessWidget {
 }
 
 {{/stful}}
-

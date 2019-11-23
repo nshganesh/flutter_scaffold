@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:meta/meta.dart';
 import 'package:mustache/mustache.dart';
+import 'package:recase/recase.dart';
 import 'package:args/command_runner.dart';
 
 class ContainerCommand extends Command {
@@ -9,6 +10,9 @@ class ContainerCommand extends Command {
   final name = "container";
   final description = "Creates container page";
   final aliases = ["c"];
+
+  String page, path;
+  bool stful = true, bloc = true, i18n = true;
 
   ContainerCommand() {
     // [argParser] is automatically created by the parent class.
@@ -23,42 +27,51 @@ class ContainerCommand extends Command {
   void run() {
     // [argResults] is set before [run()] is called and contains the options
     // passed to this command.
-    final String page = argResults['page'];
-    final bool stful = argResults['stful'];
-    final bool bloc = argResults['bloc'];
-    final bool i18n = argResults['i18n'];
+    this.page = argResults['page'];
+    this.stful = argResults['stful'];
+    this.bloc = argResults['bloc'];
+    this.i18n = argResults['i18n'];
 
-    generateIndex(page: page, stful: stful, bloc: bloc, i18n: i18n);
-    print(stful);
-    print(bloc);
-    print(i18n);
-
-    if (stful) {
-      print("Hello, $page!");
-    } else {
-      print("hello world");
-    }
+    createDir();
   }
 
-  void generateIndex(
-      {@required String page,
-      bool stful = true,
-      bool bloc = true,
-      bool i18n = true}) async {
+  void createDir() {
+    ReCase reCase = new ReCase(page);
+    Directory("${reCase.pascalCase}Page")
+      ..create().then((Directory directory) {
+        this.path = directory.path;
+        createFiles();
+      });
+  }
+
+  void createFiles() {
+    generateIndex();
+  }
+
+  void generateIndex() async {
     File file = File('flutter-templates/container.txt');
 
     if (await file.exists()) {
       String source = await file.readAsString();
 
-      Template template = Template(source, name: 'flutter-templates/container.txt');
+      Template template =
+          Template(source, name: 'flutter-templates/container.txt');
 
       String output = template.renderString({
         'page': page,
+        'stful': stful,
       });
 
-      File fileCopy = await File('test.dart').writeAsString(output);
-      await fileCopy.exists();
-      await fileCopy.length();
+      File fileCopy = await File("${path}/index.dart").create(recursive: true)
+        ..writeAsString(output);
+
+      bool isExist = await fileCopy.exists();
+
+      if (isExist) {
+        print("✔ ${page} created successfully!");
+      } else {
+        print("✘ ${page} could not be created!");
+      }
     } else {
       print("No file exists");
     }
