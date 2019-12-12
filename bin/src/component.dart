@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:recase/recase.dart';
 import 'package:mustache/mustache.dart';
 import 'package:args/command_runner.dart';
-import "package:path/path.dart" show dirname, join;
-import 'dart:io' show Platform;
+import 'package:resource/resource.dart' show Resource;
+import 'dart:convert' show utf8;
 
 class ComponentCommand extends Command {
   // The [name] and [description] properties must be defined by every
@@ -49,30 +49,24 @@ class ComponentCommand extends Command {
   }
 
   void generateIndex() async {
-    var path = join(dirname(Platform.script.path), 'flutter-templates/component.txt');
-    File file = File(path);
+    Resource resource = Resource("package:flutter_scaffold/flutter-templates/container.txt");
+    String source = await resource.readAsString(encoding: utf8);
 
-    if (await file.exists()) {
-      String source = await file.readAsString();
+    Template template =
+        Template(source, name: 'flutter-templates/component.txt');
 
-      Template template =
-          Template(source, name: 'flutter-templates/component.txt');
+    String output = template.renderString({
+      'page': page,
+      'stful': stful,
+    });
 
-      String output = template.renderString({
-        'page': page,
-        'stful': stful,
-      });
+    File fileCopy = await File("${path}/index.dart").create(recursive: true)
+      ..writeAsString(output);
 
-      File fileCopy = await File("${path}/index.dart").create(recursive: true)
-        ..writeAsString(output);
+    bool isExist = await fileCopy.exists();
 
-      bool isExist = await fileCopy.exists();
-
-      if (isExist) {
-        print("✔ ${page} created successfully!");
-      } else {
-        print("✘ ${page} could not be created!");
-      }
+    if (isExist) {
+      print("✔ ${page} created successfully!");
     } else {
       print("✘ ${page} could not be created!");
     }
