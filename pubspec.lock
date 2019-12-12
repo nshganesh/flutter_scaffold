@@ -2,28 +2,28 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   args:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.2"
   meta:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
   mustache:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: mustache
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
   recase:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: recase
       url: "https://pub.dartlang.org"

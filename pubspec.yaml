@@ -7,7 +7,7 @@ homepage: https://github.com/nshganesh/flutter_scaffold.git
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
-dev_dependencies:
+dependencies:
   args: ^1.5.2
   meta: ^1.1.8
   mustache: ^1.1.1
