@@ -53,6 +53,7 @@ class ContainerCommand extends Command {
     var path = join(dirname(Platform.script.path), 'flutter-templates/container.txt');
     File file = File(path);
 
+    print("Hello" + path);
     if (await file.exists()) {
       String source = await file.readAsString();
 

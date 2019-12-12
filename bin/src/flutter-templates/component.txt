@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+
+{{#stful}}
+class {{ page }} extends StatefulWidget {
+  const {{ page }}({ Key key }) : super(key: key);
+
+  @override
+  {{ page }}State createState() => {{ page }}State();
+}
+
+class {{ page }}State extends State<{{ page }}> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(),
+    );
+  }
+}
+{{/stful}}
+
+{{^stful}}
+class {{ page }} extends StatelessWidget {
+
+  {{ page }}({
+
+  });
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+{{/stful}}
