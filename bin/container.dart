@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:mustache/mustache.dart';
 import 'package:recase/recase.dart';
 import 'package:args/command_runner.dart';
+import "package:path/path.dart" show dirname, join;
+import 'dart:io' show Platform;
 
 class ContainerCommand extends Command {
   // The [name] and [description] properties must be defined by every
@@ -48,7 +50,8 @@ class ContainerCommand extends Command {
   }
 
   void generateIndex() async {
-    File file = File('flutter-templates/container.txt');
+    var path = join(dirname(Platform.script.path), 'flutter-templates/container.txt');
+    File file = File(path);
 
     if (await file.exists()) {
       String source = await file.readAsString();
