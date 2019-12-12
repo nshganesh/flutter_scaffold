@@ -1,11 +1,14 @@
 name: flutter_scaffold
 description: To be able to generate file structure
-version: 0.0.3
+version: 0.0.4
 author: Ganesh Hegde<nshganesh@gmail.com>
 homepage: https://github.com/nshganesh/flutter_scaffold.git
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
+
+executables:
+  flutter_scaffold:
 
 dependencies:
   args: ^1.5.2
