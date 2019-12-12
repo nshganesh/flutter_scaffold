@@ -1,6 +1,6 @@
 <b>Flutter Scaffold<b>
   
-  Inspired from react boilerplate generator <a>https://github.com/react-boilerplate/react-boilerplate/tree/master/internals/generators</a>.
+  Inspired from react boilerplate generator https://github.com/react-boilerplate/react-boilerplate/tree/master/internals/generators.
   
-  Quick scaffolding<br/>
-  <strong>Create components, containers - and their tests - right from the CLI!</strong>
+  Quick scaffolding
+    Create components, containers - and their tests - right from the CLI!
