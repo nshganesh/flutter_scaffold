@@ -7,3 +7,4 @@
 
   `pub global activate flutter_scaffold`
   `pub global run flutter_scaffold c -p Home -sbi`
+  `pub global run flutter_scaffold component -p CheckBox -si`

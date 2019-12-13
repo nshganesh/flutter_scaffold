@@ -36,12 +36,13 @@ class ComponentCommand extends Command {
   }
 
   void createDir() {
-    ReCase reCase = new ReCase(page);
-    Directory("${reCase.pascalCase}Page")
-      ..create().then((Directory directory) {
-        this.path = directory.path;
-        createFiles();
-      });
+    ReCase reCase = ReCase(page);
+    Directory("lib/components/${reCase.pascalCase}Page")
+        .create(recursive: true)
+        .then((Directory directory) {
+      this.path = directory.path;
+      createFiles();
+    });
   }
 
   void createFiles() {
@@ -49,7 +50,8 @@ class ComponentCommand extends Command {
   }
 
   void generateIndex() async {
-    Resource resource = Resource("package:flutter_scaffold/flutter-templates/container.txt");
+    Resource resource =
+        Resource("package:flutter_scaffold/flutter-templates/container.txt");
     String source = await resource.readAsString(encoding: utf8);
 
     Template template =
