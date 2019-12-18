@@ -48,6 +48,7 @@ class ContainerCommand extends Command {
 
   void createFiles() {
     generateIndex();
+    generateBloc();
   }
 
   void generateIndex() async {
@@ -72,6 +73,31 @@ class ContainerCommand extends Command {
       print("✔ ${page} created successfully!");
     } else {
       print("✘ ${page} could not be created!");
+    }
+  }
+
+  void generateBloc() async {
+    if (!this.bloc) return;
+
+    Resource resource =
+        Resource("package:flutter_scaffold/flutter-templates/bloc.txt");
+    String source = await resource.readAsString(encoding: utf8);
+
+    Template template = Template(source, name: 'flutter-templates/bloc.txt');
+
+    String output = template.renderString({
+      'page': page,
+    });
+
+    File fileCopy = await File("${path}/bloc.dart").create(recursive: true)
+      ..writeAsString(output);
+
+    bool isExist = await fileCopy.exists();
+
+    if (isExist) {
+      print("✔ ${page}Bloc created successfully!");
+    } else {
+      print("✘ ${page}Bloc could not be created!");
     }
   }
 }

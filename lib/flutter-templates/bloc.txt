@@ -1,0 +1,42 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
+enum {{ page }}Event { event1 }
+
+class {{ page }}State {
+  final bool isFetching;
+
+  const {{ page }}State({
+    @required this.isFetching,
+  });
+
+  factory {{ page }}State.initial() {
+    return {{ page }}State(
+      isFetching: false,
+    );
+  }
+
+  {{ page }State copyWith({bool isFetching}) {
+    return {{ page }State(
+      isFetching: isFetching,
+    );
+  }
+}
+
+class {{ page }}Bloc extends Bloc<{{ page }}Event, {{ page }}State> {
+  @override
+  {{ page }}State get initialState => {{ page }}State.initial();
+
+  @override
+  Stream<{{ page }}State> mapEventToState({{ page }}Event event) async* {
+    switch (event) {
+      case {{ page }}Event.event1:
+        yield state.copyWith(isFetching: false);
+        break;
+      default:
+        throw Exception('unhandled event: $event');
+    }
+  }
+}

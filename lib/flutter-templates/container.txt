@@ -1,19 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import './bloc.dart';
+
+class {{ page }}Index extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(title: Text('Boilerplate')),
+        body: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: BlocProvider(
+            create: (context) => {{ page }}Bloc(),
+            child: {{ page }}(),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 {{#stful}}
 class {{ page }} extends StatefulWidget {
   const {{ page }}({ Key key }) : super(key: key);
 
   @override
-  {{ page }}State createState() => {{ page }}State();
+  _{{ page }}State createState() => _{{ page }}State();
 }
 
-class {{ page }}State extends State<{{ page }}> {
+class _{{ page }}State extends State<{{ page }}> {
+  {{ page }}Bloc _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = BlocProvider.of<{{ page }}Bloc>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    return BlocBuilder<{{ page }}Bloc, {{ page }}State>(
+      builder: (context, state) {
+        return Center(
+          child: RaisedButton(
+            onPressed: () => _bloc.add({{ page }}Event.event1),
+            child: Text('Submit ${state.count}'),
+          ),
+        );
+      },
     );
   }
 }
@@ -25,10 +62,19 @@ class {{ page }} extends StatelessWidget {
   {{ page }}({
 
   });
-  
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BlocBuilder<{{ page }}Bloc, {{ page }}State>(
+      builder: (context, state) {
+        return Container(
+          child: RaisedButton(
+            onPressed: () => _bloc.add({{ page }}Event.event1),
+            child: Text('Submit ${state.count}'),
+          ),
+        );
+      },
+    );
   }
 }
 
